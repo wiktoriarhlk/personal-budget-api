@@ -33,4 +33,9 @@ public class AccountController {
     public void deleteAccount(@PathVariable Long id) {
         accountService.deleteAccount(id);
     }
+
+    @GetMapping("/{id}/summary")
+    public SummaryResponse getSummary(@PathVariable Long id) {
+        return accountService.getSummary(id);
+    }
 }
