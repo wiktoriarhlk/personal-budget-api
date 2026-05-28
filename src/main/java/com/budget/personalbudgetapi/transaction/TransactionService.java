@@ -2,6 +2,7 @@ package com.budget.personalbudgetapi.transaction;
 
 import com.budget.personalbudgetapi.account.Account;
 import com.budget.personalbudgetapi.account.AccountRepository;
+import com.budget.personalbudgetapi.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ public class TransactionService {
     @Transactional
     public Transaction addTransaction(Long accountId, Transaction transaction) {
         Account account = accountRepository.findById(accountId)
-                .orElseThrow(() -> new RuntimeException("Account not found"));
+                .orElseThrow(() -> new NotFoundException("Account not found"));
 
         transaction.setAccount(account);
 
@@ -35,7 +36,7 @@ public class TransactionService {
     @Transactional
     public void deleteTransaction(Long id) {
         Transaction transaction = transactionRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Transaction not found"));
+                .orElseThrow(() -> new NotFoundException("Transaction not found"));
 
         Account account = transaction.getAccount();
 
