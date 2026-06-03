@@ -61,4 +61,25 @@ public class TransactionService {
             return transactionRepository.findByAccountId(accountId);
         }
     }
+
+    public String exportToCsv(Long accountId) {
+        accountRepository.findById(accountId)
+                .orElseThrow(() -> new NotFoundException("Account not found"));
+
+        List<Transaction> transactions = transactionRepository.findByAccountId(accountId);
+
+        StringBuilder csv = new StringBuilder();
+        csv.append("id,amount,type,category,description,date\n");
+
+        for (Transaction t : transactions) {
+            csv.append(t.getId()).append(",")
+                    .append(t.getAmount()).append(",")
+                    .append(t.getType()).append(",")
+                    .append(t.getCategory()).append(",")
+                    .append(t.getDescription() != null ? t.getDescription() : "").append(",")
+                    .append(t.getDate()).append("\n");
+        }
+
+        return csv.toString();
+    }
 }
