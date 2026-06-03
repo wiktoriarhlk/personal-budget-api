@@ -1,6 +1,7 @@
 package com.budget.personalbudgetapi.account;
 
 import com.budget.personalbudgetapi.transaction.Transaction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
