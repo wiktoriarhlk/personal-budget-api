@@ -1,5 +1,6 @@
 package com.budget.personalbudgetapi.transaction;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.CREATED)
     public Transaction addTransaction(
             @PathVariable Long accountId,
-            @RequestBody Transaction transaction) {
+            @Valid @RequestBody Transaction transaction) {
         return transactionService.addTransaction(accountId, transaction);
     }
 
@@ -35,4 +36,6 @@ public class TransactionController {
     public void deleteTransaction(@PathVariable Long id) {
         transactionService.deleteTransaction(id);
     }
+
+
 }

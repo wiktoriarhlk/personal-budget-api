@@ -2,6 +2,7 @@ package com.budget.personalbudgetapi.account;
 
 import com.budget.personalbudgetapi.transaction.Transaction;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Account {
     private Long id;
 
     @Column(nullable = false)
+    @NotBlank(message = "Account name cannot be blank")
     private String name;
 
     @Column(nullable = false)

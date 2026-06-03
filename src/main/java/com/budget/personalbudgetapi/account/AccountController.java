@@ -1,5 +1,6 @@
 package com.budget.personalbudgetapi.account;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Account createAccount(@RequestBody Account account) {
+    public Account createAccount(@Valid @RequestBody Account account) {
         return accountService.createAccount(account);
     }
 
